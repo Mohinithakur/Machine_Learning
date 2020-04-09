@@ -1,0 +1,49 @@
+import pandas as pd
+
+training = pd.read_csv('Chat_Bot/Training.csv')
+
+testing = pd.read_csv('Chat_Bot/Testing.csv')
+
+#removing the target value and storing it in variable.
+
+cols =training.columns[:-1]
+cols
+
+X=training[cols]
+y=training['prognosis']
+
+y
+
+red_data = training.groupby(training['prognosis']).max()
+
+from sklearn.preprocessing import LabelEncoder
+
+
+pre_data =preprocessing.LabelEncoder()
+
+pre_data.fit(y)
+y=pre_data.transform(y)
+
+y
+
+#spliting
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+test_X = testing[testing.columns[:-1]]
+
+test_y  = testing['prognosis']
+
+
+pre_data.fit(test_y)
+test_y = pre_data.transform(test_y)
+
+from sklearn.tree import DecisionTreeClassifier,_tree
+
+clf = DecisionTreeClassifier()
+
+clf1=clf.fit(X_train,y_train)
+
+clf1.score(X_train,y_train)
+
